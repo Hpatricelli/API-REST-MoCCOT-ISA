@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PersonaService  {
@@ -32,6 +33,7 @@ public class PersonaService  {
     }
     public void eliminar(Persona persona){personaRepository.delete(persona);}
     public void modificar(Persona persona){personaRepository.save(persona);}
+
 
 
 

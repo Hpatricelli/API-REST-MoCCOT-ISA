@@ -24,7 +24,7 @@ public class PersonaController {
         this.service = service;
     }
 
-    @GetMapping("/personal")
+    @GetMapping("/personas")
     public List<PersonaResponse> consultarTodasLasPersonas() {
         var response =
                 service
@@ -35,14 +35,15 @@ public class PersonaController {
         return response;
     }
 
-    @PostMapping("/persona")
+
+    @PostMapping("/personas")
     public PersonaResponse alta(@RequestBody PersonaRequest persona) {
-        var response = new PersonaResponse(persona.toEntity().getGrado(),persona.toEntity().getNombre(),persona.toEntity().getApellido(),persona.toEntity().getStatus());
+        var response = new PersonaResponse(persona.toEntity().getId(),persona.toEntity().getGrado(),persona.toEntity().getNombre(),persona.toEntity().getApellido(),persona.toEntity().getStatus());
         service.save(persona.toEntity());
         return response;
     }
 
-    @PatchMapping("/persona/{id}")
+    @PatchMapping("/personas/{id}")
     public PersonaResponse modificarPersona(
             @PathVariable Long id,
             @RequestParam boolean status
@@ -54,7 +55,7 @@ public class PersonaController {
                 .response();
     }
 
-    @DeleteMapping(value = "persona/{id}")
+    @DeleteMapping(value = "personas/{id}")
     public ResponseEntity<String> eliminarPersona(@PathVariable Long id) throws NotFoundException {
         service.eliminar(service.findById(id));
 

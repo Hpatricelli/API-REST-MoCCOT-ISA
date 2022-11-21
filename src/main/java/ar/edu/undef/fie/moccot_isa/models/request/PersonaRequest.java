@@ -20,11 +20,11 @@ public class PersonaRequest {
     private Boolean status;
     public PersonaRequest() {}
 
-    public PersonaRequest(Grado grado, String nombre, String apellido, Boolean status) {
+    public PersonaRequest(Grado grado, String nombre, String apellido) {
         this.grado = grado;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.status = status;
+        this.status = true;
     }
 
 

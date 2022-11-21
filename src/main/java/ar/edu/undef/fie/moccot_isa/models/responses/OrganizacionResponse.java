@@ -93,4 +93,13 @@ public class OrganizacionResponse {
     public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
+
+    public String OrganizacionesInternas(Organizacion organizacion){
+        String organizacionesInternas = "";
+        for (Organizacion organizacionInterna : organizacion.getElementos()) {
+            organizacionesInternas += organizacionInterna.getNombre() + " ";
+        }
+        return organizacionesInternas;
+
+    }
 }

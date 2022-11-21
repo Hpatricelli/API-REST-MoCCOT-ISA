@@ -4,6 +4,7 @@ import ar.edu.undef.fie.moccot_isa.models.responses.OrganizacionResponse;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -112,5 +113,25 @@ public class Organizacion {
 
     public OrganizacionResponse response() {
         return new OrganizacionResponse(organizacionId, nombre, efectivoOrganico, elementos, personal, latitud, longitud,status);
+    }
+    public String OrganizacionesInternas(Organizacion organizacion){
+        String organizacionesInternas = "";
+        for (Organizacion organizacionInterna : organizacion.getElementos()) {
+            organizacionesInternas += organizacionInterna.getNombre() + " ";
+        }
+        return organizacionesInternas;
+
+    }
+
+    public List <Persona>getPersonas() {
+        //funcion que devuelve una lista de personas que pertenecen a la organizacion
+        List<Persona> personas = new ArrayList<>();
+        for (Persona persona : personal) {
+            personas.add(persona);
+        }
+        for (Organizacion organizacion : elementos) {
+            personas.addAll(organizacion.getPersonas());
+        }
+        return personas;
     }
 }

@@ -78,6 +78,9 @@ public class Persona {
     }
 
     public PersonaResponse response() {
-        return new PersonaResponse(grado, nombre, apellido,status);
+        return new PersonaResponse(personaId,grado, nombre, apellido,status);
     }
+
+
+
 }
