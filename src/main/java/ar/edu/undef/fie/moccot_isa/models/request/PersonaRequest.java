@@ -18,15 +18,24 @@ public class PersonaRequest {
     private String apellido;
 
     private Boolean status;
+    private Long idOrg;
     public PersonaRequest() {}
 
-    public PersonaRequest(Grado grado, String nombre, String apellido) {
+    public PersonaRequest(Grado grado, String nombre, String apellido, Boolean status, Long idOrg) {
         this.grado = grado;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.status = true;
+        this.status = status;
+        this.idOrg = idOrg;
     }
 
+    public Long getIdOrg() {
+        return idOrg;
+    }
+
+    public void setIdOrg(Long idOrg) {
+        this.idOrg = idOrg;
+    }
 
     public Boolean getStatus() {
         return status;
@@ -67,6 +76,6 @@ public class PersonaRequest {
     }
 
     public Persona toEntity() {
-        return new Persona(grado, nombre, apellido, status);
+        return new Persona(grado, nombre, apellido, status, idOrg);
     }
 }

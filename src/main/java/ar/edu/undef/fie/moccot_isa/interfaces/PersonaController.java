@@ -37,10 +37,10 @@ public class PersonaController {
 
 
     @PostMapping("/personas")
-    public PersonaResponse alta(@RequestBody PersonaRequest persona) {
-        var response = new PersonaResponse(persona.toEntity().getId(),persona.toEntity().getGrado(),persona.toEntity().getNombre(),persona.toEntity().getApellido(),persona.toEntity().getStatus());
-        service.save(persona.toEntity());
-        return response;
+    public void alta(@RequestBody PersonaRequest persona) {
+         service
+                .save(persona.toEntity());
+
     }
 
     @PatchMapping("/personas/{id}")

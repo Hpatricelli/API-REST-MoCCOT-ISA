@@ -22,16 +22,26 @@ public class Persona {
     private String apellido;
 
     private Boolean status;
+    private Long organizacion_id;
 
-    public Persona( Grado grado, String nombre, String apellido, Boolean status) {
+    public Persona( Grado grado, String nombre, String apellido, Boolean status, Long organizacion_id) {
 
         this.grado = grado;
         this.nombre = nombre;
         this.apellido = apellido;
         this.status = status;
+        this.organizacion_id = organizacion_id;
     }
 
     public Persona() {}
+
+    public Long getIdOrg() {
+        return organizacion_id;
+    }
+
+    public void setIdOrg(Long idOrg) {
+        this.organizacion_id = idOrg;
+    }
 
     public Boolean getStatus() {
         return status;
@@ -78,7 +88,7 @@ public class Persona {
     }
 
     public PersonaResponse response() {
-        return new PersonaResponse(personaId,grado, nombre, apellido,status);
+        return new PersonaResponse(personaId,grado, nombre, apellido,status,organizacion_id);
     }
 
 

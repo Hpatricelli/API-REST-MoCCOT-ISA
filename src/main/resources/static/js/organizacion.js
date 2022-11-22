@@ -1,12 +1,10 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
     consultarPersonasDeLaOrganizacion(localStorage.id);
-    alert(localStorage.id)
+
     $('#organizacion').DataTable();
 });
 async function consultarPersonasDeLaOrganizacion(id){
-
-    alert(id)
 
     const request = await fetch('/organizaciones/'+ id +'/personas' , {
         method: 'GET',

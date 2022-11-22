@@ -8,15 +8,25 @@ public class PersonaResponse {
     private String nombre;
     private String apellido;
     private Boolean status;
+    private Long idOrg;
 
 
-    public PersonaResponse(long id, Grado grado, String nombre, String apellido,Boolean status) {
+    public PersonaResponse(long id, Grado grado, String nombre, String apellido,Boolean status, Long idOrg) {
         this.id = id;
         this.grado = grado;
         this.nombre = nombre;
         this.apellido = apellido;
         this.status = status;
+        this.idOrg = idOrg;
 
+    }
+
+    public Long getIdOrg() {
+        return idOrg;
+    }
+
+    public void setIdOrg(Long idOrg) {
+        this.idOrg = idOrg;
     }
 
     public long getId() {
