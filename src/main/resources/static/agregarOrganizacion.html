@@ -30,52 +30,56 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div> <img alt="" style="width: 390px; height: 540px; margin-top: 0px; margin-left: 0px;" class="" src="https://tse3.mm.bing.net/th?id=OIP.M73Q9M_49_Mh7AlcL-rItwHaE6&amp;pid=Api&amp;P=0" id="yui_3_5_1_1_1669147224447_989"></div>
+                    <div> <img alt="" style="width: 390px; height: 525px; margin-top: 1.6px; margin-left: 0px;" class="" src="https://tse1.mm.bing.net/th?id=OIP.pdPLUO1r-ixtav84mAnJnAHaJ4&amp;pid=Api&amp;P=0" id="yui_3_5_1_1_1669075686194_1065"></div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Registrar Usuario</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Agregar Organización</h1>
                             </div>
                             <form class="user">
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="txtGrado"
-                                            placeholder="Grado">
-                                    </div>
-                                    <div class="col-sm-6">
+                                    <div class="form-group">
                                         <input type="text" class="form-control form-control-user" id="txtNombre"
                                             placeholder="Nombre">
                                     </div>
-                                    <hr>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control form-control-user" id="txtApellido"
-                                               placeholder="Apellido">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="txtEfectivoOrganico"
+                                            placeholder="Cantidad de Efectivos">
                                     </div>
+
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="txtLatitud"
+                                               placeholder="Latitud">
+
+                                </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control form-control-user" id="txtLongitud" placeholder="Longitud">
+                                    </div>
+
+                                <div class="form-group">
+                                    <input type="text" class="form-control form-control-user" id="txtStatus"
+                                        placeholder="Status">
                                 </div>
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="txtEmail"
-                                        placeholder="Email Address">
+                                    <input type="text" class="form-control form-control-user" id="txtElemSup"
+                                           placeholder="Nro del Elemento Superior">
                                 </div>
+
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="txtPassword" placeholder="Password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" href="#" class="form-control form-control-user"
-                                            id="txtRepetirPassword" placeholder="Repeat Password">
-                                    </div>
+
+
                                 </div>
-                                <a onclick="registrarPersona()" href="#" class="btn btn-primary btn-user btn-block">
-                                    Registrarse
+                                <a onclick="registrarOrganizacion()" href="#" class="btn btn-primary btn-user btn-block">
+                                    Agregar
                                 </a>
 
                             </form>
                             <hr>
 
                             <div class="text-center">
-                                <a class="small" href="index.html">¿Ya tienes una cuenta? ¡Inicia Sección!</a>
+                                <a class="small" href="principal.html">Volver al Inicio</a>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -93,8 +97,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="js/registrar.js"></script>
-
+    <script src="js/agregarOrganizacion.js"></script>
 
 </body>
 

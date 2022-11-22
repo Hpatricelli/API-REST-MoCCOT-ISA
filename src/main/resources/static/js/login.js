@@ -40,7 +40,7 @@ async function iniciarSesion() {
     localStorage.email = datos.email;
     localStorage.idUser = usuario.id;
     alert("Login Correcto")
-    window.location.href = 'index.html'
+    window.location.href = 'principal.html'
   } else {
     alert("Las credenciales son incorrectas. Por favor intente nuevamente.");
   }

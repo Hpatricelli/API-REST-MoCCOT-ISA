@@ -34,4 +34,10 @@ public class OrganizacionService {
 
     public void modificar(Organizacion organizacion){orgRepository.save(organizacion);}
     public void eliminar(Organizacion organizacion){organizacion.setStatus(false);}
+
+    public List<Organizacion> getOrganizaciones(){
+        return orgRepository.findAll();
+
+    }
+
 }

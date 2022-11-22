@@ -1,6 +1,6 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-    alert("hola");
+
 });
 async function registrarPersonal(){
     let datos = {};
@@ -19,7 +19,7 @@ async function registrarPersonal(){
         },
         body : JSON.stringify(datos)
     });
-    console.log(request);
+
     alert("Se agregó a la persona con exito!");
     window.location.href = 'personas.html';
 

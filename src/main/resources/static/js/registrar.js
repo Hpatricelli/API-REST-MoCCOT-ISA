@@ -25,6 +25,6 @@ async function registrarPersona(){
     });
     console.log(request);
     alert("La cuenta fue creada con exito!");
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 
 }

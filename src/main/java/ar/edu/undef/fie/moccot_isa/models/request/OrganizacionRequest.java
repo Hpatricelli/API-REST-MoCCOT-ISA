@@ -27,6 +27,7 @@ public class OrganizacionRequest {
     private Double latitud;
     private Double longitud;
     private Boolean status;
+    private Long elemento_superior_id;
 
     public OrganizacionRequest() {
         this.elementos = new ArrayList<>();
@@ -34,7 +35,7 @@ public class OrganizacionRequest {
     }
 
     public OrganizacionRequest(String nombre, Double efectivoOrganico, List<Organizacion> elementos,
-                               List<Persona> personal, Double latitud, Double longitud, Boolean status) {
+                               List<Persona> personal, Double latitud, Double longitud, Boolean status, Long elemento_superior_id) {
         this.nombre = nombre;
         this.efectivoOrganico = efectivoOrganico;
         this.elementos = elementos;
@@ -42,6 +43,7 @@ public class OrganizacionRequest {
         this.latitud = latitud;
         this.longitud = longitud;
         this.status = status;
+        this.elemento_superior_id = elemento_superior_id;
     }
 
     public Boolean getStatus() {
@@ -52,7 +54,13 @@ public class OrganizacionRequest {
         this.status = status;
     }
 
+    public Long getElemento_superior_id() {
+        return elemento_superior_id;
+    }
 
+    public void setElemento_superior_id(Long elemento_superior_id) {
+        this.elemento_superior_id = elemento_superior_id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -107,7 +115,7 @@ public class OrganizacionRequest {
         return new Organizacion(
                 nombre, efectivoOrganico,
                 elementos,
-                personal, latitud, longitud, status);
+                personal, latitud, longitud, status, elemento_superior_id);
     }
 
 }
