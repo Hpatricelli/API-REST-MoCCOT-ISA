@@ -1,6 +1,6 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-    consultarPersonasDeLaOrganizacion(localStorage.id);
+    consultarPersonasDeLaOrganizacion(localStorage.id, localStorage.token);
 
     $('#organizacion').DataTable();
 });
@@ -8,10 +8,7 @@ async function consultarPersonasDeLaOrganizacion(id){
 
     const request = await fetch('/organizaciones/'+ id +'/personas' , {
         method: 'GET',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+        headers: getHeaders()
     });
     const personas = await request.json();
 
@@ -27,4 +24,11 @@ async function consultarPersonasDeLaOrganizacion(id){
 
     document.querySelector('#organizacion tbody').outerHTML = personasOrganizacion;
 
+    function getHeaders() {
+        return {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        };
+    }
 }

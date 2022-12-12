@@ -5,6 +5,7 @@ import ar.edu.undef.fie.moccot_isa.exception.NotFoundException;
 import ar.edu.undef.fie.moccot_isa.models.entities.Usuario;
 
 import ar.edu.undef.fie.moccot_isa.repositories.UsuarioRepository;
+import ar.edu.undef.fie.moccot_isa.utils.JWTUtil;
 import de.mkammerer.argon2.Argon2;
 import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,11 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    private final JWTUtil jwtUtil;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, JWTUtil jwtUtil) {
         this.usuarioRepository = usuarioRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     public List<Usuario> findAll() {
@@ -52,5 +55,9 @@ public class UsuarioService {
     }
 
     public Usuario findByEmail(String email) {return usuarioRepository.findByEmail(email);    }
+
+    public Usuario findByToken(String token){
+        //var usu = usuarioRepository.findById(Long.parseLong(jwtUtil.getKey(token))).orElse(null);
+    return usuarioRepository.findById(Long.parseLong(jwtUtil.getKey(token))).orElse(null);    }
 }
 

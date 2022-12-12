@@ -22,5 +22,11 @@ async function registrarPersonal(){
 
     alert("Se agregó a la persona con exito!");
     window.location.href = 'personas.html';
-
+    function getHeaders() {
+        return {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        };
+    }
 }

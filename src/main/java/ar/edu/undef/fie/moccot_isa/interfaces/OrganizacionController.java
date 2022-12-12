@@ -7,9 +7,9 @@ import ar.edu.undef.fie.moccot_isa.models.entities.Persona;
 import ar.edu.undef.fie.moccot_isa.models.responses.OrganizacionResponse;
 import ar.edu.undef.fie.moccot_isa.models.responses.PersonaResponse;
 import ar.edu.undef.fie.moccot_isa.services.OrganizacionService;
+import ar.edu.undef.fie.moccot_isa.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,35 +20,59 @@ public class OrganizacionController {
 
     @Autowired
     private OrganizacionService service;
+    private UsuarioService usuarioService;
 
-    public OrganizacionController(OrganizacionService service) {this.service = service;}
+    public OrganizacionController(OrganizacionService service, UsuarioService usuarioService) {
+        this.service = service;
+        this.usuarioService = usuarioService;
+    }
 
     //muestra la lista de organizaciones
     @GetMapping("/organizaciones")
-    public List<OrganizacionResponse> consultarTodasLasOrganizaciones() {
-        var response =
-                (service
-                        .findAll()
-                        .stream()
-                        .map(Organizacion::response)
+    public List<OrganizacionResponse> consultarTodasLasOrganizaciones(@RequestHeader (value = "Authorization") String token) {
+        if(usuarioService.findByToken(token)!=null) {
+            var response =
+                    (service
+                            .findAll()
+                            .stream()
+                            .map(Organizacion::response)
 
-                        .collect(Collectors.toList()));
-
-        return response;
+                            .collect(Collectors.toList()));
+            return response;
+        }
+        else{
+            throw new NotFoundException("No se encontro el usuario");
+        }
 
     }
     @GetMapping("/organizaciones/{id}")
-    public OrganizacionResponse alta(@PathVariable Long id) {
-        return service
-                .findById(id)
-                .response();
+    public OrganizacionResponse alta(
+            @PathVariable Long id,
+            @RequestHeader (value = "Authorization") String token
+    ) {
+        if(usuarioService.findByToken(token)!=null) {
+            return service
+                    .findById(id)
+                    .response();
+        }
+        else{
+            throw new NotFoundException("No se encontro el usuario");
+        }
+
     }
 
     @PostMapping("/organizaciones")
-    public OrganizacionResponse alta(@RequestBody OrganizacionRequest organizacion) {
-        return service
-                .save(organizacion.toEntity())
-                .response();
+    public OrganizacionResponse alta(
+            @RequestBody OrganizacionRequest organizacion,
+            @RequestHeader (value = "Authorization") String token
+    ) {
+        if (usuarioService.findByToken(token) != null) {
+            return service
+                    .save(organizacion.toEntity())
+                    .response();
+        } else {
+            throw new NotFoundException("No se encontro el usuario");
+        }
     }
 
 
@@ -56,22 +80,37 @@ public class OrganizacionController {
     @PatchMapping("/organizaciones/{id}")
     public OrganizacionResponse modificarOrganizacion(
             @PathVariable Long id,
-            @RequestParam boolean status
+            @RequestParam boolean status,
+            @RequestHeader (value = "Authorization") String token
 
     ){
-        service.findById(id).setStatus(status);
-        service.modificar(service.findById(id));
+        if(usuarioService.findByToken(token)!=null) {
+            service.findById(id).setStatus(status);
+            service.modificar(service.findById(id));
 
-        return service
-                .findById(id)
-                .response();
+            return service
+                    .findById(id)
+                    .response();
+        }
+        else{
+            throw new NotFoundException("No se encontro el usuario");
+        }
+
     }
     @GetMapping(value = "/organizaciones/{id}/personas")
-    public List<PersonaResponse> getPersonasDeOrganizacion(@PathVariable Long id) {
+    public List<PersonaResponse> getPersonasDeOrganizacion(
+            @PathVariable Long id
+            //,@RequestHeader (value = "Authorization") String token
+            ) {
         //funcion que devuelve las personas de una organizacion
-        return service.findById(id).getPersonas().stream().map(Persona::response).collect(Collectors.toList());
+        //if(usuarioService.findByToken(token)!=null) {
+            return service.findById(id).getPersonas().stream().map(Persona::response).collect(Collectors.toList());
 
-    }
+        }
+        //else{
+          //  throw new NotFoundException("No se encontro el usuario");
+        //}
+
+    //}
 
 }
-//var response=service.findAll().stream().map(Organizacion::response).collect(Collectors.toList());"""

@@ -16,14 +16,18 @@ async function registrarOrganizacion(){
 
     const request = await fetch('/organizaciones', {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+        headers: getHeaders(),
         body : JSON.stringify(datos)
     });
     console.log(request);
     alert("Se agregó a la Organizacion con exito!");
     window.location.href = 'organizaciones.html';
 
+    function getHeaders() {
+        return {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        };
+    }
 }

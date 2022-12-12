@@ -3,10 +3,12 @@ package ar.edu.undef.fie.moccot_isa.interfaces;
 
 import ar.edu.undef.fie.moccot_isa.exception.NotFoundException;
 import ar.edu.undef.fie.moccot_isa.models.Request.PersonaRequest;
+import ar.edu.undef.fie.moccot_isa.models.entities.Organizacion;
 import ar.edu.undef.fie.moccot_isa.models.entities.Persona;
 
 import ar.edu.undef.fie.moccot_isa.models.responses.PersonaResponse;
 import ar.edu.undef.fie.moccot_isa.services.PersonaService;
+import ar.edu.undef.fie.moccot_isa.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,40 +21,52 @@ import java.util.stream.Collectors;
 public class PersonaController {
     @Autowired
     public PersonaService service;
+    private UsuarioService usuarioService;
 
-    public PersonaController(PersonaService service) {
+    public PersonaController(PersonaService service, UsuarioService usuarioService) {
         this.service = service;
+        this.usuarioService = usuarioService;
     }
 
     @GetMapping("/personas")
     public List<PersonaResponse> consultarTodasLasPersonas() {
-        var response =
-                service
-                .findAll()
-                .stream()
-                .map(Persona::response)
-                .collect(Collectors.toList());
-        return response;
+
+            var response =
+                    service
+                            .findAll()
+                            .stream()
+                            .map(Persona::response)
+                            .collect(Collectors.toList());
+            return response;
+
+
     }
 
 
     @PostMapping("/personas")
-    public void alta(@RequestBody PersonaRequest persona) {
-         service
-                .save(persona.toEntity());
+    public void alta(
+            @RequestBody PersonaRequest persona
+    ) {
 
-    }
+            service
+                    .save(persona.toEntity());
+        }
+
+
+
 
     @PatchMapping("/personas/{id}")
     public PersonaResponse modificarPersona(
             @PathVariable Long id,
             @RequestParam boolean status
     ){
-        service.findById(id).setStatus(status);
-        service.modificar(service.findById(id));
-        return service
-                .findById(id)
-                .response();
+
+            service.findById(id).setStatus(status);
+            service.modificar(service.findById(id));
+            return service
+                    .findById(id)
+                    .response();
+
     }
 
     @DeleteMapping(value = "personas/{id}")

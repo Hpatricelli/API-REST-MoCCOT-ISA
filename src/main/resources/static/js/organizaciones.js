@@ -1,16 +1,13 @@
 // Call the dataTables jQuery plugin
 $(document).ready(function() {
-  cargarOrganizaciones();
+  cargarOrganizaciones(localStorage.token);
   $('#organizaciones').DataTable();
 });
-async function cargarOrganizaciones(){
+async function cargarOrganizaciones() {
 
     const request = await fetch('/organizaciones', {
       method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: getHeaders()
     });
     const listOrganizaciones = await request.json();
     let listadoHtml = '';
@@ -31,6 +28,7 @@ async function cargarOrganizaciones(){
 }
 function guardarId(id) {
     localStorage.id = id;
+    localStorage.token = localStorage.token;
 }
 async function eliminarOrganizacion(id) {
 
@@ -42,14 +40,19 @@ async function eliminarOrganizacion(id) {
     const request = await fetch('/organizaciones/' + id +'?status=false', {
 
         method: 'PATCH',
-            headers:{
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
+            headers:getHeaders()
 
     });
     alert('Organización eliminada');
 
 
     location.reload()
+
+    function getHeaders() {
+        return {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.token
+        };
+    }
 }
